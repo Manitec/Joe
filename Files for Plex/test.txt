@@ -1,0 +1,165 @@
+need this
+controll hub
+files older working
+css  also have old layouy
+‎src/app/globals.css‎
++10
+-85
+Lines changed: 10 additions & 85 deletions
+Original file line number	Original file line	Diff line number	Diff line change
+@@ -1,88 +1,13 @@
+/* Manitec Control Hub — Cyberpunk Theme */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+* {
+body {
+  box-sizing: border-box;
+  background-color: #0a0a0a;
+  margin: 0;
+  color: #e5e5e5;
+  padding: 0;
+}
+}
+
+
+:root {
+::-webkit-scrollbar { width: 6px; height: 6px; }
+  --cyan: #00ffff;
+::-webkit-scrollbar-track { background: #111; }
+  --purple: #bf00ff;
+::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+  --pink: #ff00aa;
+::-webkit-scrollbar-thumb:hover { background: #555; }
+  --dark: #0a0a0f;
+  --dark2: #0f0f1a;
+  --dark3: #1a0030;
+  --text: #e0e0e0;
+  --text-dim: #888;
+  --online: #00ff88;
+  --offline: #ff3355;
+  --slow: #ffaa00;
+}
+html, body {
+  background: var(--dark);
+  color: var(--text);
+  font-family: 'Courier New', Courier, monospace;
+  min-height: 100vh;
+}
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--dark); }
+::-webkit-scrollbar-thumb { background: var(--purple); border-radius: 3px; }
+/* Neon text utility */
+.neon-cyan { color: var(--cyan); text-shadow: 0 0 10px var(--cyan); }
+.neon-purple { color: var(--purple); text-shadow: 0 0 10px var(--purple); }
+.neon-pink { color: var(--pink); text-shadow: 0 0 10px var(--pink); }
+/* Card */
+.card {
+  background: var(--dark2);
+  border: 1px solid var(--purple);
+  border-radius: 8px;
+  padding: 1.25rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.card:hover {
+  border-color: var(--cyan);
+  box-shadow: 0 0 16px rgba(0,255,255,0.15);
+}
+/* Status dots */
+.dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+.dot.online  { background: var(--online);  box-shadow: 0 0 6px var(--online); }
+.dot.offline { background: var(--offline); box-shadow: 0 0 6px var(--offline); }
+.dot.slow    { background: var(--slow);    box-shadow: 0 0 6px var(--slow); }
+.dot.unknown { background: var(--text-dim); }
+/* Button */
+.btn {
+  display: inline-block;
+  padding: 8px 20px;
+  border: 1px solid var(--cyan);
+  color: var(--cyan);
+  background: transparent;
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s;
+  border-radius: 4px;
+}
+.btn:hover {
+  background: var(--cyan);
+  color: #000;
+  box-shadow: 0 0 12px var(--cyan);
+}
+
+
+
+======================================================
+=======================================================
+‎src/app/layout.tsx‎
++17
+-11
+Lines changed: 17 additions & 11 deletions
+Original file line number	Original file line	Diff line number	Diff line change
+@@ -1,19 +1,25 @@
+import type { Metadata } from 'next'
+import type { Metadata } from 'next';
+import './globals.css'
+import './globals.css';
+
+
+export const metadata: Metadata = {
+export const metadata: Metadata = {
+  title: 'Manitec Control Hub',
+  title: 'Manitec Control Hub',
+  description: 'Empire command center — live status, deploys, quick launch',
+  description: 'Manitec internal ops dashboard',
+}
+};
+
+
+export default function RootLayout({
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+  return (
+    <html lang="en">
+    <html lang="en">
+      <body>{children}</body>
+      <body className="bg-manitec-bg text-manitec-text font-mono min-h-screen">
+        <nav className="border-b border-manitec-border px-6 py-3 flex items-center gap-6">
+          <span className="text-manitec-accent font-bold tracking-widest text-sm">MANITEC</span>
+          <span className="text-manitec-muted text-xs">CONTROL HUB</span>
+          <div className="ml-auto flex gap-4 text-xs text-manitec-muted">
+            <a href="/" className="hover:text-manitec-text transition">home</a>
+            <a href="/firestore" className="hover:text-manitec-text transition">firestore</a>
+          </div>
+        </nav>
+        <main className="p-6">{children}</main>
+      </body>
+    </html>
+    </html>
+  )
+  );
+}
+}
+
+
+
+
+==================================================
+===============================================
+
